@@ -6,7 +6,19 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-    <!-- == /main == -->
+    <!-- == filters == -->
+    <!-- encoding filter -->
+    <filter>
+        <filter-name>Encoding</filter-name>
+        <filter-class>com.romantupikov.simpleapp.filter.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- == servlets == -->
+    <!-- /main -->
     <servlet>
         <servlet-name>Main</servlet-name>
         <servlet-class>com.romantupikov.simpleapp.servlet.MainServlet</servlet-class>
@@ -16,7 +28,7 @@
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
 
-    <!-- == /catalog == -->
+    <!-- /catalog -->
     <servlet>
         <servlet-name>Catalog</servlet-name>
         <servlet-class>com.romantupikov.simpleapp.servlet.CatalogServlet</servlet-class>
@@ -26,7 +38,7 @@
         <url-pattern>/catalog</url-pattern>
     </servlet-mapping>
 
-    <!-- == /cart == -->
+    <!-- /cart -->
     <servlet>
         <servlet-name>Cart</servlet-name>
         <servlet-class>com.romantupikov.simpleapp.servlet.CartServlet</servlet-class>
@@ -36,7 +48,7 @@
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
 
-    <!-- == /product == -->
+    <!-- /product -->
     <servlet>
         <servlet-name>Product</servlet-name>
         <servlet-class>com.romantupikov.simpleapp.servlet.ProductServlet</servlet-class>
@@ -46,7 +58,7 @@
         <url-pattern>/product</url-pattern>
     </servlet-mapping>
 
-    <!-- == /order == -->
+    <!-- /order -->
     <servlet>
         <servlet-name>Order</servlet-name>
         <servlet-class>com.romantupikov.simpleapp.servlet.OrderServlet</servlet-class>
