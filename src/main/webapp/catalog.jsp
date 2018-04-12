@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Main</title>
+    <title>Catalog</title>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <li><a href="${pageContext.request.contextPath}/order">Order</a></li>
 </ul>
 
-<h1>Main</h1>
+<h1>Catalog</h1>
 
 </body>
 </html>
