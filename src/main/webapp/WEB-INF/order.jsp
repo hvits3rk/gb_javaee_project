@@ -8,11 +8,13 @@
 
 <body>
 
-<div class="menu">
-    <jsp:include page="component/header.jsp" />
-</div>
+<jsp:include page="component/header.jsp"/>
 
-<h1>Order</h1>
+<div class="container">
+    <div class="section">
+        <h1>Заказ</h1>
+    </div>
+</div>
 
 </body>
 </html>

@@ -7,11 +7,14 @@
 </head>
 
 <body>
-<div class="menu">
-    <jsp:include page="component/header.jsp" />
-</div>
 
-<h1>Product</h1>
+<jsp:include page="component/header.jsp"/>
+
+<div class="container">
+    <div class="section">
+        <h1>Продукт</h1>
+    </div>
+</div>
 
 </body>
 </html>

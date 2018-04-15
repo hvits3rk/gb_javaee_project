@@ -1,8 +1,10 @@
 <%@ page pageEncoding="UTF-8" %>
-<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/catalog">Catalog</a></li>
-    <li><a href="/product">Product</a></li>
-    <li><a href="/cart">Cart</a></li>
-    <li><a href="/order">Order</a></li>
-</ul>
+<div class="header">
+    <ul class="menu">
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog">Каталог</a></li>
+        <%--<li><a href="/product">Продукт</a></li>--%>
+        <li><a href="/cart">Корзина</a></li>
+        <li><a href="/order">Заказ</a></li>
+    </ul>
+</div>
