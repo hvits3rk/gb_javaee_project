@@ -9,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Named
 @ApplicationScoped
 public class ProductDAO {
 
@@ -33,9 +32,21 @@ public class ProductDAO {
         return products.values();
     }
 
+    public Product getProductById(String productId) {
+        return products.get(productId);
+    }
+
     public void addNewProduct(Product product) {
         String id = UUID.randomUUID().toString();
         product.setId(id);
         products.put(id, product);
+    }
+
+    public void merge(Product product) {
+        products.put(product.getId(), product);
+    }
+
+    public void removeProductById(String productId) {
+        products.remove(productId);
     }
 }

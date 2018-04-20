@@ -19,22 +19,31 @@
                     <div class="section">
                         <h:form>
                             <label for="product-name">Name: </label>
-                            <h:inputText id="product-name" value="#{catalogController.product.name}" />
+                            <h:inputText id="product-name" value="#{catalogController.product.name}"/>
                             <label for="product-description">Description: </label>
-                            <h:inputText id="product-description" value="#{catalogController.product.description}" />
+                            <h:inputText id="product-description" value="#{catalogController.product.description}"/>
                             <label for="product-price">Price: </label>
                             <h:inputText id="product-price" value="#{catalogController.product.price}">
-                                <f:convertNumber />
+                                <f:convertNumber/>
                             </h:inputText>
                             <h:commandLink actionListener="#{catalogController.addNewProduct}">ADD</h:commandLink>
                         </h:form>
                     </div>
                     <div class="card-list">
                         <ui:repeat var="product" value="#{catalogController.products}">
-                            <div class="card pointer">
-                                <p>ID: <span>${product.id}</span></p>
-                                <p>NAME: <span>${product.name}</span></p>
-                                <p>DESC: <span>${product.description}</span></p>
+                            <div class="card">
+                                <h:form>
+                                    <p>ID: <span>${product.id}</span></p>
+                                    <p>NAME: <span>${product.name}</span></p>
+                                    <p>DESC: <span>${product.description}</span></p>
+                                    <p><h:commandLink actionListener="#{catalogController.removeProduct(product.id)}"
+                                                      value="REMOVE"/></p>
+                                    <p>
+                                        <h:link outcome="edit_product" value="EDIT">
+                                            <f:param name="id" value="#{product.id}"/>
+                                        </h:link>
+                                    </p>
+                                </h:form>
                             </div>
                         </ui:repeat>
                     </div>
