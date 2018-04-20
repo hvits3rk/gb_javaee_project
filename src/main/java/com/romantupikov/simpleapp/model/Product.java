@@ -8,11 +8,12 @@ public class Product {
     private int price;
 
     public Product() {
+        this("New Product", "New Product Description");
     }
 
-    public Product(String name, int price) {
+    public Product(String name, String description) {
         this.name = name;
-        this.price = price;
+        this.description = description;
     }
 
     public String getId() {

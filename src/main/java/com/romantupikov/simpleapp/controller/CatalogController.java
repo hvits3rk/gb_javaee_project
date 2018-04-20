@@ -16,7 +16,21 @@ public class CatalogController {
     @Inject
     private ProductDAO productDAO;
 
+    private Product product = new Product();
+
     public List<Product> getProducts() {
         return new ArrayList<>(productDAO.getAllProducts());
+    }
+
+    public void addNewProduct() {
+        productDAO.addNewProduct(product);
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

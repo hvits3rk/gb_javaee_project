@@ -32,4 +32,10 @@ public class ProductDAO {
     public Collection<Product> getAllProducts() {
         return products.values();
     }
+
+    public void addNewProduct(Product product) {
+        String id = UUID.randomUUID().toString();
+        product.setId(id);
+        products.put(id, product);
+    }
 }

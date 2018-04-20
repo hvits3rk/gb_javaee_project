@@ -16,6 +16,19 @@
             <div class="container">
                 <div class="section">
                     <h1>Каталог</h1>
+                    <div class="section">
+                        <h:form>
+                            <label for="product-name">Name: </label>
+                            <h:inputText id="product-name" value="#{catalogController.product.name}" />
+                            <label for="product-description">Description: </label>
+                            <h:inputText id="product-description" value="#{catalogController.product.description}" />
+                            <label for="product-price">Price: </label>
+                            <h:inputText id="product-price" value="#{catalogController.product.price}">
+                                <f:convertNumber />
+                            </h:inputText>
+                            <h:commandLink actionListener="#{catalogController.addNewProduct}">ADD</h:commandLink>
+                        </h:form>
+                    </div>
                     <div class="card-list">
                         <ui:repeat var="product" value="#{catalogController.products}">
                             <div class="card pointer">
