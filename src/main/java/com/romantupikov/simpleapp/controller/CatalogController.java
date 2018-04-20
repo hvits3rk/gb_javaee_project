@@ -3,14 +3,14 @@ package com.romantupikov.simpleapp.controller;
 import com.romantupikov.simpleapp.dao.ProductDAO;
 import com.romantupikov.simpleapp.model.Product;
 
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
-@ViewScoped
+@RequestScoped
 public class CatalogController {
 
     @Inject
@@ -26,8 +26,16 @@ public class CatalogController {
         productDAO.addNewProduct(product);
     }
 
+    public void saveProduct() {
+        productDAO.merge(product);
+    }
+
     public void removeProduct(String productId) {
         productDAO.removeProductById(productId);
+    }
+
+    public String test() {
+        return "index";
     }
 
     public Product getProduct() {

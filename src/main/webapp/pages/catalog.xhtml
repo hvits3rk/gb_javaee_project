@@ -18,6 +18,8 @@
                     <h1>Каталог</h1>
                     <div class="section">
                         <h:form>
+                            <label for="product-id">ID: </label>
+                            <h:inputText id="product-id" value="#{catalogController.product.id}"/>
                             <label for="product-name">Name: </label>
                             <h:inputText id="product-name" value="#{catalogController.product.name}"/>
                             <label for="product-description">Description: </label>
@@ -26,7 +28,8 @@
                             <h:inputText id="product-price" value="#{catalogController.product.price}">
                                 <f:convertNumber/>
                             </h:inputText>
-                            <h:commandLink actionListener="#{catalogController.addNewProduct}">ADD</h:commandLink>
+                            <h:commandButton value="ADD" actionListener="#{catalogController.addNewProduct}"/>
+                            <h:commandButton value="SAVE" actionListener="#{catalogController.saveProduct}"/>
                         </h:form>
                     </div>
                     <div class="card-list">

@@ -17,6 +17,8 @@
                 <div class="section">
                     <h1>Редактирование продукта</h1>
                     <h:form>
+                        <label for="product-id">ID: </label>
+                        <h:inputText id="product-id" value="#{productEditController.product.id}" />
                         <label for="product-name">NAME: </label>
                         <h:inputText id="product-name" value="#{productEditController.product.name}" />
                         <label for="product-desc">DESCRIPTION: </label>
