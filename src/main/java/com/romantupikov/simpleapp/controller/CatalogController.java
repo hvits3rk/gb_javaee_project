@@ -3,16 +3,15 @@ package com.romantupikov.simpleapp.controller;
 import com.romantupikov.simpleapp.dao.ProductDAO;
 import com.romantupikov.simpleapp.model.Product;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import java.io.Serializable;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean
-@SessionScoped
-public class CatalogController implements Serializable {
+@Named
+@RequestScoped
+public class CatalogController {
 
     @Inject
     private ProductDAO productDAO;

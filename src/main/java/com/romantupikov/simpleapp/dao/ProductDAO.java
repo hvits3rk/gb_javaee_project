@@ -3,11 +3,13 @@ package com.romantupikov.simpleapp.dao;
 import com.romantupikov.simpleapp.model.Product;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Named
 @ApplicationScoped
 public class ProductDAO {
 
