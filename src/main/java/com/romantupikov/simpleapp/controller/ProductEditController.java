@@ -1,20 +1,18 @@
 package com.romantupikov.simpleapp.controller;
 
 import com.romantupikov.simpleapp.dao.ProductDAO;
-import com.romantupikov.simpleapp.model.Product;
+import com.romantupikov.simpleapp.entity.Product;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.Serializable;
 
-@Named
-@ConversationScoped
-public class ProductEditController extends AbstractController implements Serializable {
+@ViewScoped
+@ManagedBean
+public class ProductEditController extends AbstractController {
 
-    private String id = getParamString("id");
+    private final String id = getParamString("id");
 
     @Inject
     private ProductDAO productDAO;
@@ -24,22 +22,18 @@ public class ProductEditController extends AbstractController implements Seriali
     @PostConstruct
     private void init() {
         product = productDAO.getProductById(id);
-        System.out.println(product);
-    }
-
-    public String save() {
-        System.out.println("Save:\n" + product);
-        productDAO.merge(product);
-        return "catalog";
     }
 
     public Product getProduct() {
-        System.out.println("getProduct:\n" + product);
         return product;
     }
 
     public void setProduct(Product product) {
-        System.out.println("setProduct:\n" + product);
         this.product = product;
+    }
+
+    public String save() {
+        productDAO.merge(product);
+        return "catalog";
     }
 }

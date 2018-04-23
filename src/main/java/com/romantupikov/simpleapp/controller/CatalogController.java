@@ -1,19 +1,16 @@
 package com.romantupikov.simpleapp.controller;
 
 import com.romantupikov.simpleapp.dao.ProductDAO;
-import com.romantupikov.simpleapp.model.Product;
+import com.romantupikov.simpleapp.entity.Product;
 
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-@Named
-@ConversationScoped
-public class CatalogController implements Serializable {
+@ViewScoped
+@ManagedBean
+public class CatalogController {
 
     @Inject
     private ProductDAO productDAO;
@@ -21,11 +18,11 @@ public class CatalogController implements Serializable {
     private Product product;
 
     public List<Product> getProducts() {
-        return new ArrayList<>(productDAO.getAllProducts());
+        return productDAO.getListProduct();
     }
 
     public void addNewProduct() {
-        productDAO.addNewProduct(product);
+        productDAO.persist(product);
     }
 
     public void saveProduct() {
@@ -33,11 +30,7 @@ public class CatalogController implements Serializable {
     }
 
     public void removeProduct(String productId) {
-        productDAO.removeProductById(productId);
-    }
-
-    public String test() {
-        return "index";
+        productDAO.removeProduct(productId);
     }
 
     public Product getProduct() {

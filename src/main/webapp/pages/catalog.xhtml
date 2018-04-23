@@ -2,12 +2,13 @@
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Product</title>
+    <title>Catalog</title>
 </h:head>
 <h:body>
     <ui:composition template="template/default_layout.xhtml">
@@ -17,38 +18,55 @@
                 <div class="section">
                     <h1>Каталог</h1>
                     <div class="section">
-                        <h:form>
-                            <label for="product-id">ID: </label>
-                            <h:inputText id="product-id" value="#{catalogController.product.id}"/>
-                            <label for="product-name">Name: </label>
-                            <h:inputText id="product-name" value="#{catalogController.product.name}"/>
-                            <label for="product-description">Description: </label>
-                            <h:inputText id="product-description" value="#{catalogController.product.description}"/>
-                            <label for="product-price">Price: </label>
-                            <h:inputText id="product-price" value="#{catalogController.product.price}">
-                                <f:convertNumber/>
-                            </h:inputText>
-                            <h:commandButton value="ADD" actionListener="#{catalogController.addNewProduct}"/>
-                            <h:commandButton value="SAVE" actionListener="#{catalogController.saveProduct}"/>
-                        </h:form>
-                    </div>
-                    <div class="card-list">
-                        <ui:repeat var="product" value="#{catalogController.products}">
-                            <div class="card">
-                                <h:form>
-                                    <p>ID: <span>${product.id}</span></p>
-                                    <p>NAME: <span>${product.name}</span></p>
-                                    <p>DESC: <span>${product.description}</span></p>
-                                    <p><h:commandLink actionListener="#{catalogController.removeProduct(product.id)}"
-                                                      value="REMOVE"/></p>
-                                    <p>
-                                        <h:link outcome="edit_product" value="EDIT">
-                                            <f:param name="id" value="#{product.id}"/>
-                                        </h:link>
-                                    </p>
-                                </h:form>
-                            </div>
-                        </ui:repeat>
+                        <table width="100%" border="1" style="margin-bottom: 20px;">
+                            <tr>
+                                <th>
+                                    id
+                                </th>
+                                <th>
+                                    name
+                                </th>
+                            </tr>
+                            <ui:repeat value="#{catalogController.products}" var="product">
+                                <tr>
+                                    <td align="left"><p:outputLabel value="#{product.id}"/></td>
+                                    <td align="left"><p:outputLabel value="#{product.name}"/></td>
+                                </tr>
+                            </ui:repeat>
+                        </table>
+
+                        <p:dataTable value="#{catalogController.products}" var="item" rowIndexVar="rowIndex"
+                                     style="margin-bottom: 20px;" id="table">
+                            <p:column width="30" headerText="№" style="text-align: center;">
+                                <p:outputLabel value="#{rowIndex + 1}."/>
+                            </p:column>
+                            <p:column width="250" headerText="ID" sortable="true" sortBy="#{item.id}">
+                                <p:outputLabel value="#{item.id}"/>
+                            </p:column>
+                            <p:column headerText="NAME" style="width: 100%; text-align: left;" sortable="true"
+                                      sortBy="#{item.name}">
+                                <p:outputLabel value="#{item.name}"/>
+                            </p:column>
+                            <p:column width="80" style="text-align: center;">
+                                <p:link value="EDIT" outcome="edit">
+                                    <f:param name="id" value="#{item.id}"/>
+                                </p:link>
+                            </p:column>
+                            <p:column width="80" style="text-align: center;">
+                                <p:commandLink title="REMOVE" update="table" value="REMOVE"
+                                               actionListener="#{catalogController.removeProduct(item)}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:outputPanel style="margin-bottom: 20px;">
+                            <p:commandButton value="ADD PRODUCT" update="table"
+                                             actionListener="#{catalogController.addProduct}"/>
+                        </p:outputPanel>
+
+                        <h:link outcome="mega" value="GO TO MEGA PAGE">
+                            <f:param name="id" value="HELLO"/>
+                            <f:param name="catalogId" value="123"/>
+                        </h:link>
                     </div>
                 </div>
             </div>

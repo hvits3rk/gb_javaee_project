@@ -1,52 +1,46 @@
 package com.romantupikov.simpleapp.dao;
 
-import com.romantupikov.simpleapp.model.Product;
+import com.romantupikov.simpleapp.entity.Product;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
+import javax.ejb.Stateless;
+import java.util.List;
 
-@ApplicationScoped
-public class ProductDAO {
+@Stateless
+public class ProductDAO extends AbstractDAO {
 
-    private Map<String, Product> products;
-
-    public ProductDAO() {
-        products = new LinkedHashMap<>(9);
-
-        for (int i = 1; i < 10; i++) {
-            Product product = new Product();
-            String id = UUID.randomUUID().toString();
-            product.setId(id);
-            String productName = "Product " + i;
-            product.setName(productName);
-            product.setDescription("This is the " + productName);
-            products.put(id, product);
-        }
+    public List<Product> getListProductByCategoryId(String categoryId) {
+        if (categoryId == null || categoryId.isEmpty()) return getListProduct();
+        return em.createQuery("SELECT e FROM Product e WHERE e.category.id = :categoryId", Product.class)
+                .setParameter("categoryId", categoryId).getResultList();
     }
 
-    public Collection<Product> getAllProducts() {
-        return products.values();
+    public List<Product> getListProduct() {
+        return em.createQuery("SELECT e FROM Product e", Product.class).getResultList();
     }
 
-    public Product getProductById(String productId) {
-        return products.get(productId);
+    public void persist(Product product) {
+        if (product == null) return;
+        em.persist(product);
     }
 
-    public void addNewProduct(Product product) {
-        String id = UUID.randomUUID().toString();
-        product.setId(id);
-        products.put(id, product);
+    public Product getProductById(String id) {
+        if (id == null) return null;
+        return em.find(Product.class, id);
     }
 
     public void merge(Product product) {
-        products.put(product.getId(), product);
+        if (product == null) return;
+        em.merge(product);
     }
 
-    public void removeProductById(String productId) {
-        products.remove(productId);
+    public void removeProduct(Product product) {
+        if (product == null) return;
+        em.remove(product);
+    }
+
+    public void removeProduct(String productId) {
+        if (productId == null || productId.isEmpty()) return;
+        Product product = em.find(Product.class, productId);
+        em.remove(product);
     }
 }

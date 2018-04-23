@@ -5,10 +5,6 @@
          version="3.1">
 
     <display-name>Archetype Created Web Application</display-name>
-    <context-param>
-        <param-name>javax.faces.CONFIG_FILES</param-name>
-        <param-value>/WEB-INF/persistence.xml</param-value>
-    </context-param>
 
     <welcome-file-list>
         <welcome-file>/pages/index.xhtml</welcome-file>
