@@ -3,20 +3,22 @@ package com.romantupikov.simpleapp.controller;
 import com.romantupikov.simpleapp.dao.ProductDAO;
 import com.romantupikov.simpleapp.model.Product;
 
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
-@RequestScoped
-public class CatalogController {
+@ConversationScoped
+public class CatalogController implements Serializable {
 
     @Inject
     private ProductDAO productDAO;
 
-    private Product product = new Product();
+    private Product product;
 
     public List<Product> getProducts() {
         return new ArrayList<>(productDAO.getAllProducts());

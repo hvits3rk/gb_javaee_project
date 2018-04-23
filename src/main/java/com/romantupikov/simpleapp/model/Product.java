@@ -1,26 +1,42 @@
 package com.romantupikov.simpleapp.model;
 
-public class Product {
+import javax.persistence.*;
+import java.io.Serializable;
 
-    private String id;
+@Entity
+@Table(name = "Product")
+public class Product implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "price")
     private int price;
 
+    @Column(name = "count")
+    private int count;
+
+    @Column(name = "active")
+    private boolean active;
+
+    @ManyToOne
+    private Category category;
+
     public Product() {
-        this("New Product", "New Product Description");
     }
 
-    public Product(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,6 +62,30 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

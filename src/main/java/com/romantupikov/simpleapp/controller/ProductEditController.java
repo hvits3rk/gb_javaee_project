@@ -4,15 +4,17 @@ import com.romantupikov.simpleapp.dao.ProductDAO;
 import com.romantupikov.simpleapp.model.Product;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 
 @Named
-@RequestScoped
-public class ProductEditController extends AbstractController {
+@ConversationScoped
+public class ProductEditController extends AbstractController implements Serializable {
 
-    private final String id = getParamString("id");
+    private String id = getParamString("id");
 
     @Inject
     private ProductDAO productDAO;
