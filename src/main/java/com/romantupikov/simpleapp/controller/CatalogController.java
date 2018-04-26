@@ -1,36 +1,36 @@
 package com.romantupikov.simpleapp.controller;
 
-import com.romantupikov.simpleapp.dao.ProductDAO;
 import com.romantupikov.simpleapp.entity.Product;
+import com.romantupikov.simpleapp.service.ProductService;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
 import java.util.List;
 
 @ViewScoped
 @ManagedBean
 public class CatalogController {
 
-    @Inject
-    private ProductDAO productDAO;
+    @EJB
+    private ProductService productService;
 
     private Product product;
 
     public List<Product> getProducts() {
-        return productDAO.getListProduct();
+        return productService.getListProduct();
     }
 
     public void addNewProduct() {
-        productDAO.persist(product);
+        productService.persist(product);
     }
 
     public void saveProduct() {
-        productDAO.merge(product);
+        productService.merge(product);
     }
 
     public void removeProduct(String productId) {
-        productDAO.removeProduct(productId);
+        productService.removeProduct(productId);
     }
 
     public Product getProduct() {

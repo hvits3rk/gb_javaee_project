@@ -1,12 +1,12 @@
 package com.romantupikov.simpleapp.controller;
 
-import com.romantupikov.simpleapp.dao.ProductDAO;
 import com.romantupikov.simpleapp.entity.Product;
+import com.romantupikov.simpleapp.service.ProductService;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
 
 @ViewScoped
 @ManagedBean
@@ -14,14 +14,14 @@ public class ProductEditController extends AbstractController {
 
     private final String id = getParamString("id");
 
-    @Inject
-    private ProductDAO productDAO;
+    @EJB
+    private ProductService productService;
 
     private Product product;
 
     @PostConstruct
     private void init() {
-        product = productDAO.getProductById(id);
+        product = productService.getProductById(id);
     }
 
     public Product getProduct() {
@@ -33,7 +33,7 @@ public class ProductEditController extends AbstractController {
     }
 
     public String save() {
-        productDAO.merge(product);
+        productService.merge(product);
         return "catalog";
     }
 }
