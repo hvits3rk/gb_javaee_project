@@ -12,7 +12,7 @@ import java.util.List;
 @Stateless
 public class ProductBean implements ProductService {
 
-    @PersistenceContext(unitName = "persistence-unit")
+    @PersistenceContext(unitName = "webapp-persistence-unit")
     private EntityManager em;
 
     @Override

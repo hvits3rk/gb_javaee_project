@@ -12,7 +12,7 @@ import java.util.List;
 @Stateful
 public class OrderBean implements OrderService {
 
-    @PersistenceContext(unitName = "persistence-unit")
+    @PersistenceContext(unitName = "webapp-persistence-unit")
     private EntityManager em;
 
     @Override
