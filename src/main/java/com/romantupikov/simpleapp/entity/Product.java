@@ -1,5 +1,6 @@
 package com.romantupikov.simpleapp.entity;
 
+import com.google.gson.annotations.Expose;
 import com.romantupikov.simpleapp.enums.ProductType;
 
 import javax.persistence.*;
@@ -8,19 +9,25 @@ import java.util.Date;
 @Entity
 public class Product extends AbstractEntity {
 
+    @Expose
     @Column(nullable = false, columnDefinition = "TEXT")
     private String name = "";
 
+    @Expose
     @Column
     private String description = "";
 
+    @Expose
     private Date date;
 
-    @ManyToOne
+    @Expose
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
 
+    @Expose
     private Boolean publish;
 
+    @Expose
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 
@@ -70,5 +77,16 @@ public class Product extends AbstractEntity {
 
     public void setProductType(ProductType productType) {
         this.productType = productType;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", publish=" + publish +
+                ", productType=" + productType +
+                "} " + super.toString();
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 @Local
 public interface CategoryService {
 
-    public List<Category> getListCategory();
+    public List<Category> getCategoryList();
 
     public void persist(Category category);
 

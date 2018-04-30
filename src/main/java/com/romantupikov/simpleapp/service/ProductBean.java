@@ -18,14 +18,14 @@ public class ProductBean implements ProductService {
     @Override
     @Interceptors({Logger.class})
     public List<Product> getListProductByCategoryId(String categoryId) {
-        if (categoryId == null || categoryId.isEmpty()) return getListProduct();
+        if (categoryId == null || categoryId.isEmpty()) return getProductList();
         return em.createQuery("SELECT e FROM Product e WHERE e.category.id = :categoryId", Product.class)
                 .setParameter("categoryId", categoryId).getResultList();
     }
 
     @Override
     @Interceptors({Logger.class})
-    public List<Product> getListProduct() {
+    public List<Product> getProductList() {
         return em.createQuery("SELECT e FROM Product e", Product.class).getResultList();
     }
 
@@ -45,16 +45,17 @@ public class ProductBean implements ProductService {
 
     @Override
     @Interceptors({Logger.class})
-    public void merge(Product product) {
-        if (product == null) return;
-        em.merge(product);
+    public Product getProductByName(String name) {
+        if (name == null) return null;
+        return em.createQuery("SELECT e from Product e where e.name = :productName", Product.class)
+                .setParameter("productName", name).getSingleResult();
     }
 
     @Override
     @Interceptors({Logger.class})
-    public void removeProduct(Product product) {
+    public void merge(Product product) {
         if (product == null) return;
-        em.remove(product);
+        em.merge(product);
     }
 
     @Override

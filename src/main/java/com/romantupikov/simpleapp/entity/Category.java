@@ -1,26 +1,31 @@
 package com.romantupikov.simpleapp.entity;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 public class Category extends AbstractEntity {
 
+    @Expose
     @Column
     private String name = "";
 
+    @Expose
     @Column
     private String description = "";
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products = new ArrayList<>();
+    private Collection<Product> products = new ArrayList<>();
 
-    public List<Product> getProducts() {
+    public Collection<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Collection<Product> products) {
         this.products = products;
     }
 
@@ -38,5 +43,13 @@ public class Category extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                "} " + super.toString();
     }
 }

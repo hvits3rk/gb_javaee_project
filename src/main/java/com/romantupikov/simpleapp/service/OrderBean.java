@@ -17,7 +17,7 @@ public class OrderBean implements OrderService {
 
     @Override
     @Interceptors({Logger.class})
-    public List<Order> getListOrder() {
+    public List<Order> getOrderList() {
         return em.createQuery("SELECT e FROM Order e", Order.class).getResultList();
     }
 

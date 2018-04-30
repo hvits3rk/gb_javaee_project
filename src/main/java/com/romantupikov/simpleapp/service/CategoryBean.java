@@ -17,7 +17,7 @@ public class CategoryBean implements CategoryService {
 
     @Override
     @Interceptors({Logger.class})
-    public List<Category> getListCategory() {
+    public List<Category> getCategoryList() {
         return em.createQuery("SELECT e FROM Category e", Category.class).getResultList();
     }
 

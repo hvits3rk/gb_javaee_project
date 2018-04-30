@@ -8,7 +8,7 @@ import java.util.List;
 @Local
 public interface OrderService {
 
-    public List<Order> getListOrder();
+    public List<Order> getOrderList();
 
     public void persist(Order order);
 
