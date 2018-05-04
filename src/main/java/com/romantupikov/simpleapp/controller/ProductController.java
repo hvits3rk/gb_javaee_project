@@ -24,6 +24,7 @@ import java.util.Date;
 //      +++  g. Получить товары по Id категории.
 
 @Path("product")
+@Produces("application/json")
 public class ProductController {
 
     @EJB
@@ -36,28 +37,24 @@ public class ProductController {
     private GsonBean gsonBean;
 
     @GET
-    @Produces("application/json")
     @Path("/all")
     public String getAllProducts() {
         return gsonBean.getGson().toJson(productService.getProductList());
     }
 
     @GET
-    @Produces("application/json")
     @Path("/category/{categoryId}")
     public String getProductsByCategoryId(@PathParam("categoryId") String categoryId) {
         return gsonBean.getGson().toJson(productService.getListProductByCategoryId(categoryId));
     }
 
     @GET
-    @Produces("application/json")
     @Path("/{productId}")
     public String getProductById(@PathParam("productId") String productId) {
         return gsonBean.getGson().toJson(productService.getProductById(productId));
     }
 
     @GET
-    @Produces("application/json")
     @Path("/{productName}")
     public String getProductByName(@PathParam("productName") String productName) {
         String name = productName.replace("_", " ");
@@ -65,7 +62,6 @@ public class ProductController {
     }
 
     @DELETE
-    @Produces("application/json")
     @Path("/delete/{productId}")
     public String deleteProductById(@PathParam("productId") String productId) {
         Product product = productService.getProductById(productId);
@@ -76,7 +72,6 @@ public class ProductController {
 
     @POST
     @Consumes("application/json")
-    @Produces("application/json")
     @Path("/add")
     public String addNewProduct(String data) {
 

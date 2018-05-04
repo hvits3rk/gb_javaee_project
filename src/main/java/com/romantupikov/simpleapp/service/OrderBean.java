@@ -10,47 +10,42 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateful
+@Interceptors({Logger.class})
 public class OrderBean implements OrderService {
 
     @PersistenceContext(unitName = "webapp-persistence-unit")
     private EntityManager em;
 
     @Override
-    @Interceptors({Logger.class})
     public List<Order> getOrderList() {
         return em.createQuery("SELECT e FROM Order e", Order.class).getResultList();
     }
 
     @Override
-    @Interceptors({Logger.class})
     public void persist(Order order) {
         if (order == null) return;
         em.persist(order);
     }
 
     @Override
-    @Interceptors({Logger.class})
     public Order getOrderById(String id) {
         if (id == null) return null;
         return em.find(Order.class, id);
     }
 
     @Override
-    @Interceptors({Logger.class})
     public void merge(Order order) {
         if (order == null) return;
         em.merge(order);
     }
 
     @Override
-    @Interceptors({Logger.class})
     public void removeOrder(Order order) {
         if (order == null) return;
         em.remove(order);
     }
 
     @Override
-    @Interceptors({Logger.class})
     public void removeOrder(String orderId) {
         if (orderId == null || orderId.isEmpty()) return;
         Order product = em.find(Order.class, orderId);

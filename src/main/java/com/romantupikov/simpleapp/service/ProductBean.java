@@ -10,13 +10,13 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
+@Interceptors({Logger.class})
 public class ProductBean implements ProductService {
 
     @PersistenceContext(unitName = "webapp-persistence-unit")
     private EntityManager em;
 
     @Override
-    @Interceptors({Logger.class})
     public List<Product> getListProductByCategoryId(String categoryId) {
         if (categoryId == null || categoryId.isEmpty()) return getProductList();
         return em.createQuery("SELECT e FROM Product e WHERE e.category.id = :categoryId", Product.class)
@@ -24,27 +24,23 @@ public class ProductBean implements ProductService {
     }
 
     @Override
-    @Interceptors({Logger.class})
     public List<Product> getProductList() {
         return em.createQuery("SELECT e FROM Product e", Product.class).getResultList();
     }
 
     @Override
-    @Interceptors({Logger.class})
     public void persist(Product product) {
         if (product == null) return;
         em.persist(product);
     }
 
     @Override
-    @Interceptors({Logger.class})
     public Product getProductById(String id) {
         if (id == null) return null;
         return em.find(Product.class, id);
     }
 
     @Override
-    @Interceptors({Logger.class})
     public Product getProductByName(String name) {
         if (name == null) return null;
         return em.createQuery("SELECT e from Product e where e.name = :productName", Product.class)
@@ -52,14 +48,12 @@ public class ProductBean implements ProductService {
     }
 
     @Override
-    @Interceptors({Logger.class})
     public void merge(Product product) {
         if (product == null) return;
         em.merge(product);
     }
 
     @Override
-    @Interceptors({Logger.class})
     public void removeProduct(String productId) {
         if (productId == null || productId.isEmpty()) return;
         Product product = em.find(Product.class, productId);

@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 
 @Path("category")
+@Produces("application/json")
 public class CategoryController {
 
     @Inject
@@ -22,7 +23,6 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GET
-    @Produces("application/json")
     @Path("/all")
     public String getAllCategories() {
         return gsonBean.getGson().toJson(categoryService.getCategoryList());
@@ -30,7 +30,6 @@ public class CategoryController {
 
     @POST
     @Consumes("application/json")
-    @Produces("application/json")
     @Path("/add")
     public String addNewCategory(String data) {
 
