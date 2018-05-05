@@ -11,17 +11,8 @@ import com.romantupikov.simpleapp.service.CategoryService;
 import com.romantupikov.simpleapp.service.ProductService;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.Date;
-
-//      +++  a. Добавлять товар в БД;
-//      +++  b. Удалять товар из БД;
-//      +++  c. Добавлять категорию товара;
-//      +++  d. Получить товар по Id;
-//      +++  e. Получить товар по имени;
-//      +++  f. Получить все товары;
-//      +++  g. Получить товары по Id категории.
 
 @Path("product")
 @Produces("application/json")
@@ -33,32 +24,29 @@ public class ProductController {
     @EJB
     private CategoryService categoryService;
 
-    @Inject
-    private GsonBean gsonBean;
-
     @GET
     @Path("/all")
     public String getAllProducts() {
-        return gsonBean.getGson().toJson(productService.getProductList());
+        return GsonBean.getGson().toJson(productService.getProductList());
     }
 
     @GET
     @Path("/category/{categoryId}")
     public String getProductsByCategoryId(@PathParam("categoryId") String categoryId) {
-        return gsonBean.getGson().toJson(productService.getListProductByCategoryId(categoryId));
+        return GsonBean.getGson().toJson(productService.getListProductByCategoryId(categoryId));
     }
 
     @GET
     @Path("/{productId}")
     public String getProductById(@PathParam("productId") String productId) {
-        return gsonBean.getGson().toJson(productService.getProductById(productId));
+        return GsonBean.getGson().toJson(productService.getProductById(productId));
     }
 
     @GET
     @Path("/{productName}")
     public String getProductByName(@PathParam("productName") String productName) {
         String name = productName.replace("_", " ");
-        return gsonBean.getGson().toJson(productService.getProductByName(name));
+        return GsonBean.getGson().toJson(productService.getProductByName(name));
     }
 
     @DELETE
@@ -67,7 +55,7 @@ public class ProductController {
         Product product = productService.getProductById(productId);
         productService.removeProduct(productId);
 
-        return gsonBean.getGson().toJson(product);
+        return GsonBean.getGson().toJson(product);
     }
 
     @POST
@@ -91,7 +79,7 @@ public class ProductController {
         String productName = rootNode.get("name").getAsString();
         String productDescription = rootNode.get("description").getAsString();
         boolean productPublish = rootNode.get("publish").getAsBoolean();
-        ProductType productType = gsonBean.getGson().fromJson(rootNode.get("productType"), ProductType.class);
+        ProductType productType = GsonBean.getGson().fromJson(rootNode.get("productType"), ProductType.class);
         String categoryId = rootNode.get("categoryId").getAsString();
 
         Product product = new Product();
@@ -106,6 +94,6 @@ public class ProductController {
 
         productService.merge(product);
 
-        return gsonBean.getGson().toJson(product);
+        return GsonBean.getGson().toJson(product);
     }
 }

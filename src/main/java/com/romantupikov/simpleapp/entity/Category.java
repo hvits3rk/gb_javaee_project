@@ -5,7 +5,6 @@ import com.google.gson.annotations.Expose;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class Category extends AbstractEntity {

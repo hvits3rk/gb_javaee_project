@@ -1,23 +1,19 @@
 package com.romantupikov.simpleapp.controller;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.romantupikov.simpleapp.bean.GsonBean;
 import com.romantupikov.simpleapp.entity.Category;
-import com.romantupikov.simpleapp.enums.ProductType;
 import com.romantupikov.simpleapp.service.CategoryService;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.ws.rs.*;
 
 @Path("category")
 @Produces("application/json")
 public class CategoryController {
-
-    @Inject
-    private GsonBean gsonBean;
 
     @EJB
     private CategoryService categoryService;
@@ -25,7 +21,7 @@ public class CategoryController {
     @GET
     @Path("/all")
     public String getAllCategories() {
-        return gsonBean.getGson().toJson(categoryService.getCategoryList());
+        return GsonBean.getGson().toJson(categoryService.getCategoryList());
     }
 
     @POST
@@ -52,6 +48,6 @@ public class CategoryController {
 
         categoryService.persist(category);
 
-        return gsonBean.getGson().toJson(category);
+        return GsonBean.getGson().toJson(category);
     }
 }

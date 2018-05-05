@@ -5,19 +5,12 @@ import com.google.gson.GsonBuilder;
 
 import javax.enterprise.context.RequestScoped;
 
-@RequestScoped
 public class GsonBean {
 
-    private Gson gson;
-
-    public GsonBean() {
-        this.gson = new GsonBuilder()
+    public static Gson getGson() {
+        return new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
                 .serializeNulls()
                 .create();
-    }
-
-    public Gson getGson() {
-        return this.gson;
     }
 }
